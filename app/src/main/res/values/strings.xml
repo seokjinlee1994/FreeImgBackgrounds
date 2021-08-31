@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FreeImgBackgrounds</string>
+    <string name="search_keyword">검색어 입력</string>
+    <string name="err_msg">에러가 발생했습니다. \n새로고침 해주세요.</string>
+</resources>
