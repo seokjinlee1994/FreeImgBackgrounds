@@ -77,7 +77,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
-        rvImageList.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+        rvImageList.layoutManager =
+            LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
         rvImageList.adapter = PhotoAdapter()
     }
 
@@ -96,6 +97,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             true
+        }
+        imbSearchRefresh.setOnClickListener {
+            edtSearch.setText("")
+            fetchRandomPhotos()
         }
         layRefresh.setOnRefreshListener {
             fetchRandomPhotos(binding.edtSearch.text.toString())
@@ -169,12 +174,14 @@ class MainActivity : AppCompatActivity() {
                         val snackbar = Snackbar.make(binding.root, "다운로드 완료", Snackbar.LENGTH_SHORT)
 
                         if (wallpaperManager.isWallpaperSupported &&
-                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && wallpaperManager.isSetWallpaperAllowed)) {
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && wallpaperManager.isSetWallpaperAllowed)
+                        ) {
                             snackbar.setAction("배경 화면으로 지정") {
                                 try {
                                     wallpaperManager.setBitmap(resource)
                                 } catch (exception: Exception) {
-                                    Snackbar.make(binding.root, "배경화면 저장 실패", Snackbar.LENGTH_SHORT).show()
+                                    Snackbar.make(binding.root, "배경화면 저장 실패", Snackbar.LENGTH_SHORT)
+                                        .show()
                                 }
                             }
                             snackbar.duration = Snackbar.LENGTH_INDEFINITE
