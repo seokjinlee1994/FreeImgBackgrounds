@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        //asda
+
         initViews()
         bindViews()
 
