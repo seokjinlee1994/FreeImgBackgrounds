@@ -1,8 +1,6 @@
 package com.lsj.freeimgbackgrounds
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -48,8 +46,8 @@ class PhotoAdapter: RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
                     (binding.root.paddingStart + binding.root.paddingEnd)
             val targetHeight = (targetWidth * dimensionRatio).toInt()
 
-            binding.contentsContainer.layoutParams =
-                binding.contentsContainer.layoutParams.apply {
+            binding.layContentsContainer.layoutParams =
+                binding.layContentsContainer.layoutParams.apply {
                     height = targetHeight
                 }
 
@@ -61,27 +59,27 @@ class PhotoAdapter: RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
                         .transition(DrawableTransitionOptions.withCrossFade())
                 )
                 .override(targetWidth, targetHeight)
-                .into(binding.photoImageView)
+                .into(binding.imvPhoto)
 
             Glide.with(binding.root)
                 .load(photo.user?.profileImageUrls?.small)
-                .placeholder(R.drawable.shpe_profile_placeholder)
+                .placeholder(R.drawable.shape_profile_placeholder)
                 .circleCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.profileImageView)
+                .into(binding.imvProfile)
 
             if (photo.user?.name.isNullOrBlank()) {
-                binding.authorTextView.isGone = true
+                binding.tvAuthor.isGone = true
             } else {
-                binding.authorTextView.isVisible = true
-                binding.authorTextView.text = photo.user?.name
+                binding.tvAuthor.isVisible = true
+                binding.tvAuthor.text = photo.user?.name
             }
 
             if (photo.description.isNullOrBlank()) {
-                binding.descriptionTextView.isGone = true
+                binding.tvDescription.isGone = true
             } else {
-                binding.descriptionTextView.isVisible = true
-                binding.descriptionTextView.text = photo.description
+                binding.tvDescription.isVisible = true
+                binding.tvDescription.text = photo.description
             }
         }
     }

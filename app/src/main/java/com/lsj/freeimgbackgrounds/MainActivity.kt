@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //asda
-
         initViews()
         bindViews()
 
@@ -78,13 +76,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViews() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        binding.recyclerView.adapter = PhotoAdapter()
+    private fun initViews() = with(binding) {
+        rvImageList.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+        rvImageList.adapter = PhotoAdapter()
     }
 
-    private fun bindViews() {
-        binding.searchEditText.setOnEditorActionListener { editText, actionId, event ->
+    private fun bindViews() = with(binding) {
+        edtSearch.setOnEditorActionListener { editText, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 currentFocus?.let { view ->
                     val inputMethodManager =
@@ -99,11 +97,11 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
-        binding.refreshLayout.setOnRefreshListener {
-            fetchRandomPhotos(binding.searchEditText.text.toString())
+        layRefresh.setOnRefreshListener {
+            fetchRandomPhotos(binding.edtSearch.text.toString())
         }
 
-        (binding.recyclerView.adapter as? PhotoAdapter)?.onClickPhoto = { photo ->
+        (rvImageList.adapter as? PhotoAdapter)?.onClickPhoto = { photo ->
             showDownloadPhotoConfirmationDialog(photo)
         }
     }
@@ -120,19 +118,19 @@ class MainActivity : AppCompatActivity() {
         try {
             Repository.getRandomPhotos(query)?.let { photos ->
 
-                binding.errorDesctiptionTextView.isGone = true
-                (binding.recyclerView.adapter as? PhotoAdapter)?.apply {
+                binding.tvError.isGone = true
+                (binding.rvImageList.adapter as? PhotoAdapter)?.apply {
                     this.photos = photos
                     notifyDataSetChanged()
                 }
-                binding.recyclerView.isVisible = true
+                binding.rvImageList.isVisible = true
             }
         } catch (exception: Exception) {
-            binding.recyclerView.isGone = true
-            binding.errorDesctiptionTextView.isVisible = true
+            binding.rvImageList.isGone = true
+            binding.tvError.isVisible = true
         } finally {
-            binding.shimmerLayout.isGone = true
-            binding.refreshLayout.isRefreshing = false
+            binding.layShimmer.isGone = true
+            binding.layRefresh.isRefreshing = false
         }
 
     }

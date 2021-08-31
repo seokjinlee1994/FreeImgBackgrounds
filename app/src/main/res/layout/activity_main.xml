@@ -5,25 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black_60"
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/searchEditText"
+        android:id="@+id/edt_search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/white"
+        android:background="@color/dark_gray"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="6dp"
+        android:textColor="@color/white"
         android:elevation="8dp"
         android:hint="@string/search_keyword"
         android:imeOptions="actionSearch"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:paddingHorizontal="12dp"
+        android:padding="12dp"
         android:textSize="14sp" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/lay_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +34,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/rv_image_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -40,7 +42,7 @@
                 android:paddingVertical="6dp" />
 
             <TextView
-                android:id="@+id/errorDesctiptionTextView"
+                android:id="@+id/tv_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -51,7 +53,7 @@
                 app:drawableTopCompat="@drawable/ic_refresh" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerLayout"
+                android:id="@+id/lay_shimmer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
