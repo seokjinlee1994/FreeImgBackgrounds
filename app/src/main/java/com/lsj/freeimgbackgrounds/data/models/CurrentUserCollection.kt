@@ -17,4 +17,6 @@ data class CurrentUserCollection(
     val updatedAt: String,
     @SerializedName("user")
     val user: Any
+
+    // pushTest
 )
